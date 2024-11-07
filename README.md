@@ -13,9 +13,7 @@
 | first_name         | string           | null: false |
 | last_name_k        | string           | null: false |   # カタカナ
 | first_name_k       | string           | null: false |   # カタカナ
-| birth_year         | integer          | null: false |
-| birth_month        | integer          | null: false |
-| birth_day          | integer          | null: false |
+| date_of_birth      | date             | null: false |
 
 ### アソシエーション
 - has_many :items
@@ -26,14 +24,14 @@
 | Column             | Type             | Options     |
 | ------------------ | ---------------- | ----------- |
 | name               | string           | null: false |
-| text               | text             | null: false |
+| item_description   | text             | null: false |
 | category_id        | integer          | null: false |   # カテゴリー
 | condition_id       | integer          | null: false |   # 状態
 | price              | integer          | null: false |
 | shipping_fee_id    | integer          | null: false |   # 送料の有無
-| shipping_days_id   | integer          | null: false |   # 配送までの日数
+| shipping_day_id    | integer          | null: false |   # 配送までの日数
 | region_id          | integer          | null: false |   # 地域(都道府県)
-| user_id            | references       | null: false, foreign_key: true |
+| user               | references       | null: false, foreign_key: true |
 
 ### アソシエーション
 - belongs_to :user
@@ -46,9 +44,8 @@
 ## statuses テーブル
 | Column             | Type             | Options     |
 | ------------------ | ---------------- | ----------- |
-| status_type_id     | integer          | null :false |   # 購入状態確認
-| user_id            | references       | null: false, foreign_key: true |
-| item_id            | references       | null: false, foreign_key: true |
+| user               | references       | null: false, foreign_key: true |
+| item               | references       | null: false, foreign_key: true |
 
 
 ### アソシエーション
@@ -57,8 +54,7 @@
 - has_one :buyer
 
 ### 特筆事項
-> ドロップダウンメニューではない_id管理<br>
-> 購入の有無を表す(sold outの条件分岐などに使用する)
+> このテーブルにレコードが存在していることが購入確定情報となる。
 
 
 ## buyers テーブル
@@ -70,7 +66,7 @@
 | street             | string           | null: false |
 | room               | string           |
 | phone_number       | string           | null: false |
-| status_id          | references       | null: false, foreign_key: true |
+| status             | references       | null: false, foreign_key: true |
 
 ### アソシエーション
 - belongs_to :status
