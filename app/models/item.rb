@@ -2,8 +2,8 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, presence: true
-  validates :item_description, presence: true
+  validates :name, presence: true, length: { maximum: 40 }
+  validates :item_description, presence: true, length: { maximum: 1000 }
   validates :price, presence: true
 
 
