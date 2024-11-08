@@ -10,4 +10,14 @@ class User < ApplicationRecord
   validates :last_name_k, presence: true,   format: { with: /\A[ァ-ヶ]+\z/, message: '全角文字を使用してください' }
   validates :first_name_k, presence: true,  format: { with: /\A[ァ-ヶ]+\z/, message: '全角文字を使用してください' }
   validates :date_of_birth, presence: true
+
+  validate :password_mixture
+
+  private
+  def password_mixture
+    if password.present? && !password.match(/\A(?=.*[a-zA-Z])(?=.*[0-9])/)
+      errors.add :password, 'には英字と数字の両方を含めてください'
+    end
+  end
+
 end
