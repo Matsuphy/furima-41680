@@ -12,6 +12,7 @@ RSpec.describe User, type: :model do
     it 'nicknameが空だと登録できない' do
       @user.nickname = ''
       @user.valid?
+      binding.pry
       expect(@user.errors.full_messages).to include "Nickname can't be blank"
     end
     it 'emailが空では登録できない' do
@@ -23,7 +24,6 @@ RSpec.describe User, type: :model do
       another_user = FactoryBot.build(:user)
       another_user = @user.email
       another_user.valid?
-      binding.pry
       expect(another_user.errors.full_messages).to include
     end
     it 'emailは@を含まないと登録できない' do
