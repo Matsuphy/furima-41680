@@ -12,6 +12,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
+    
     context '商品が登録できない場合' do
       # 商品イメージ、名前、内容文章の確認
       it 'imageが空であるとき登録できない' do
@@ -116,6 +117,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include ("Region is not valid")
       end
+
       # プライス情報の確認
       it 'priceが空であるとき登録できない' do
         @item.price = ""
