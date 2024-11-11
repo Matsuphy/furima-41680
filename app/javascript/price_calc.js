@@ -7,7 +7,7 @@ const price = () => {
   const calculate = () => {
     const inputValue = priceInput.value
     addTaxDom.innerHTML = Math.floor(inputValue * 0.1)
-    addProfitDom.innerHTML = Math.floor(inputValue * 0.9)
+    addProfitDom.innerHTML = inputValue - Math.floor(inputValue * 0.1)
   }
 
   calculate();
