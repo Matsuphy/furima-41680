@@ -3,6 +3,7 @@ const price = () => {
   const addTaxDom = document.getElementById("add-tax-price")
   const addProfitDom = document.getElementById("profit")
 
+
   const calculate = () => {
     const inputValue = priceInput.value
     addTaxDom.innerHTML = Math.floor(inputValue * 0.1)
@@ -11,7 +12,12 @@ const price = () => {
 
   calculate();
 
+  priceInput.addEventListener("input", () => {
+    priceInput.value = priceInput.value.replace(/[^0-9]/g, "");
+  });
   priceInput.addEventListener("input",calculate)
+
+
 };
 
 window.addEventListener("turbo:load", price);

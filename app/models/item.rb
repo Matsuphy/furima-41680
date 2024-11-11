@@ -2,9 +2,9 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name,              presence: true, length: { maximum: 40 }
-  validates :item_description,  presence: true, length: { maximum: 1000 }
-  validates :price,             presence: true
+  validates :name,              presence: true, length: { maximum: 40, message: "40文字以内で入力してください" }
+  validates :item_description,  presence: true, length: { maximum: 1000, message: "1000文字以内で入力してください" }
+  validates :price,             presence: true, numericality: {in: 300..9999999, message: "¥300~¥9,999,999で入力してください"}
   validates :image,             presence: true
 
 
