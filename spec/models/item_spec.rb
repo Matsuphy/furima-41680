@@ -139,6 +139,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price ¥300~¥9,999,999で入力してください")
       end
+      # ユーザーアソシエーション
+      it 'userが紐付いていないと登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("User must exist")
+      end
     end
   end
 end
