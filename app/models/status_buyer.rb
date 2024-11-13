@@ -7,7 +7,6 @@ class StatusBuyer
   validates :region_id,         presence: true, numericality: { only_integer: true, in: 2..48,        message: "is not valid" }
   validates :city,              presence: true
   validates :street,            presence: true
-  validates :room
   validates :phone_number,      presence: true, format:       { with: /\A\d{10,11}\z/}
 
   # 保存処理
