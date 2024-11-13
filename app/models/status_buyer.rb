@@ -11,7 +11,9 @@ class StatusBuyer
 
   # 保存処理
   def save
-    status = Status.create(user_id: user_id, item_id: item_id)
-    Buyer.create(post_code: post_code, region_id: region_id, city: city, street: street, room: room, phone_number: phone_number, status_id: status_id)
+    ActiveRecord::Base.transaction do
+      status = Status.create(user_id: user_id, item_id: item_id)
+      Buyer.create(post_code: post_code, region_id: region_id, city: city, street: street, room: room, phone_number: phone_number, status_id: status.id)
+    end
   end
 end

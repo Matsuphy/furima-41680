@@ -1,4 +1,5 @@
 class StatusesController < ApplicationController
+  before_action :find_item, only: [:index, :create]
 
   def index
     @status_buyer = StatusBuyer.new
@@ -11,13 +12,17 @@ class StatusesController < ApplicationController
       @status_buyer.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
   private
 
   def status_params
-    params.require(:status_buyer).permit(:post_code, :region_id, :city, :street, :room, :phone_number ).merge(item_id: item_id, user_id: current_user.id)
+    params.require(:status_buyer).permit(:post_code, :region_id, :city, :street, :room, :phone_number ).merge(item_id: params[:item_id], user_id: current_user.id)
+  end
+
+  def find_item
+    @item = Item.find(params[:item_id])
   end
 end
