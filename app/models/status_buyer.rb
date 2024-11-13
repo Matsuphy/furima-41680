@@ -3,11 +3,11 @@ class StatusBuyer
   attr_accessor :post_code, :region_id, :city, :street, :room, :phone_number, :user_id, :item_id
   
   # バリデーション
-  validates :post_code,         presence: true, format:       { with: /\A\d{3}[-]\d{4}\z/}
+  validates :post_code,         presence: true, format:       { with: /\A\d{3}[-]\d{4}\z/, message: "input correctly"}
   validates :region_id,         presence: true, numericality: { only_integer: true, in: 2..48,        message: "is not valid" }
   validates :city,              presence: true
   validates :street,            presence: true
-  validates :phone_number,      presence: true, format:       { with: /\A\d{10,11}\z/}
+  validates :phone_number,      presence: true, format:       { with: /\A\d{10,11}\z/, message: "input only number"}
 
   # 保存処理
   def save

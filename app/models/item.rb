@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :region
 
   belongs_to :user
+  has_one :status
   has_one_attached :image
 
   validates :image,             presence: true
