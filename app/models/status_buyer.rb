@@ -1,6 +1,6 @@
 class StatusBuyer
   include ActiveModel::Model
-  attr_accessor :post_code, :region_id, :city, :street, :room, :phone_number, :user_id, :item_id
+  attr_accessor :post_code, :region_id, :city, :street, :room, :phone_number, :user_id, :item_id, :token, :price
   
   # バリデーション
   validates :post_code,         presence: true, format:       { with: /\A\d{3}[-]\d{4}\z/, message: "input correctly"}
@@ -9,6 +9,7 @@ class StatusBuyer
   validates :street,            presence: true
   validates :phone_number,      presence: true, format:       { with: /\A\d{10,11}\z/, message: "input only number"}
 
+  validates :token,             presence: true
   # 保存処理
   def save
     ActiveRecord::Base.transaction do
