@@ -4,7 +4,7 @@ RSpec.describe StatusBuyer, type: :model do
   # status_buyer情報の基本入力
   before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user)
+    item = FactoryBot.create(:item)
     sleep 1
     @status_buyer = FactoryBot.build(:status_buyer, user_id: user.id, item_id: item.id)
   end
@@ -77,6 +77,17 @@ RSpec.describe StatusBuyer, type: :model do
         @status_buyer.phone_number = "123456789012"
         @status_buyer.valid?
         expect(@status_buyer.errors.full_messages).to include ("Phone number input only 10 or 11 digits number")
+      end
+      # :user :itemと結びついているかの確認
+      it ':userと紐づいてなければ登録できない' do
+        @status_buyer.user_id = ""
+        @status_buyer.valid?
+        expect(@status_buyer.errors.full_messages).to include ("User can't be blank")
+      end
+      it ':itemと紐づいてなければ登録できない' do
+        @status_buyer.item_id = ""
+        @status_buyer.valid?
+        expect(@status_buyer.errors.full_messages).to include ("Item can't be blank")
       end
     end
   end
