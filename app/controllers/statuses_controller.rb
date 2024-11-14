@@ -26,7 +26,7 @@ class StatusesController < ApplicationController
   def status_params
     params.require(:status_buyer).permit(:post_code, :region_id, :city, :street, :room, :phone_number 
     ).merge(
-      item_id: params[:item_id], user_id: current_user.id, token: params[:token]
+      item_id: params[:item_id], user_id: current_user.id, token: params[:token], price: @item.price
       )
   end
 
