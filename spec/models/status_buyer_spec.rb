@@ -19,16 +19,6 @@ RSpec.describe StatusBuyer, type: :model do
 
     context '購入と登録ができない場合' do
       # クレジットカードの情報
-      it 'priceが空であるとき登録できない' do
-        @status_buyer.price = ""
-        @status_buyer.valid?
-        expect(@status_buyer.errors.full_messages).to include ("Price can't be blank")
-      end
-      it 'priceが半角整数以外であるとき登録できない' do
-        @status_buyer.price = "あいうABc"
-        @status_buyer.valid?
-        expect(@status_buyer.errors.full_messages).to include ("Price is not valid")
-      end
       it 'tokenが空であるとき登録できない' do
         @status_buyer.token = ""
         @status_buyer.valid?

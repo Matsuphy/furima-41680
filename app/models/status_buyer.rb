@@ -1,6 +1,6 @@
 class StatusBuyer
   include ActiveModel::Model
-  attr_accessor :post_code, :region_id, :city, :street, :room, :phone_number, :user_id, :item_id, :token, :price
+  attr_accessor :post_code, :region_id, :city, :street, :room, :phone_number, :user_id, :item_id, :token
   # バリデーション
   with_options presence: true do
     validates :post_code,         format:       { with: /\A\d{3}[-]\d{4}\z/, message: "input correctly"}
@@ -10,7 +10,6 @@ class StatusBuyer
     validates :phone_number,      format:       { with: /\A\d{10,11}\z/, message: "input only 10 or 11 digits number"}
   
     validates :token
-    validates :price,             numericality: { only_integer: true, in: 300..9999999, message: "is not valid"}
   
     validates :user_id
     validates :item_id
