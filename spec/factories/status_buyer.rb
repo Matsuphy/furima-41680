@@ -9,7 +9,5 @@ FactoryBot.define do
     room            {"FGHマンション-909"}
     phone_number    {"09099998888"}
 
-    user_id          {1}
-    item_id          {2}
   end
 end

@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe StatusBuyer, type: :model do
   # status_buyer情報の基本入力
   before do
-    @status_buyer = FactoryBot.build(:status_buyer)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user: user)
+    sleep 1
+    @status_buyer = FactoryBot.build(:status_buyer, user_id: user.id, item_id: item.id)
   end
 
   describe '購入の確定と登録' do
