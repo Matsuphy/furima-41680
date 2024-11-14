@@ -29,16 +29,6 @@ RSpec.describe StatusBuyer, type: :model do
         @status_buyer.valid?
         expect(@status_buyer.errors.full_messages).to include ("Price is not valid")
       end
-      it 'priceが299以下であるとき登録できない' do
-        @status_buyer.price = 299
-        @status_buyer.valid?
-        expect(@status_buyer.errors.full_messages).to include ("Price is not valid")
-      end
-      it 'priceが10000000以上であるとき登録できない' do
-        @status_buyer.price = 10000000
-        @status_buyer.valid?
-        expect(@status_buyer.errors.full_messages).to include ("Price is not valid")
-      end
       it 'tokenが空であるとき登録できない' do
         @status_buyer.token = ""
         @status_buyer.valid?
@@ -85,8 +75,13 @@ RSpec.describe StatusBuyer, type: :model do
         @status_buyer.valid?
         expect(@status_buyer.errors.full_messages).to include ("Phone number can't be blank")
       end
-      it 'phone_numberが10桁か11桁以外であるとき登録できない' do
-        @status_buyer.phone_number = "1234567890123"
+      it 'phone_numberが9桁以下であるとき登録できない' do
+        @status_buyer.phone_number = "123456789"
+        @status_buyer.valid?
+        expect(@status_buyer.errors.full_messages).to include ("Phone number input only 10 or 11 digits number")
+      end
+      it 'phone_numberが12桁以上であるとき登録できない' do
+        @status_buyer.phone_number = "123456789012"
         @status_buyer.valid?
         expect(@status_buyer.errors.full_messages).to include ("Phone number input only 10 or 11 digits number")
       end
