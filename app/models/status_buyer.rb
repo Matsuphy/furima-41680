@@ -10,6 +10,9 @@ class StatusBuyer
 
   validates :token,             presence: true
   validates :price,             presence: true, numericality: { only_integer: true, in: 300..9999999, message: "is not valid"}
+
+  validates :user_id,           presence: true
+  validates :item_id,           presence: true
   # 保存処理
   def save
     ActiveRecord::Base.transaction do
