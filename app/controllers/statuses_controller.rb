@@ -16,6 +16,7 @@ class StatusesController < ApplicationController
       @status_buyer.save
       redirect_to root_path
     else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end
@@ -34,7 +35,7 @@ class StatusesController < ApplicationController
   end
 
   def move_to_index
-    if @item.status.present?
+    if current_user == @item.user || @item.status.present?
       redirect_to root_path
     end
   end
